@@ -301,6 +301,7 @@ RUN set -ex; \
     
     \
     wp --allow-root --version
+    wp package install aaemnnosttv/wp-cli-dotenv-command
 
 USER laradock
 
