@@ -291,21 +291,10 @@ ENV WORDPRESS_CLI_SHA512 8693cdbc06cca37be9976c4f76aa81c111095f88bb121277cbdfa85
 
 RUN set -ex; \
     \
-    apt-get install gnupg; \
-    \
-    curl -o /usr/local/bin/wp.gpg -fSL "https://github.com/wp-cli/wp-cli/releases/download/v${WORDPRESS_CLI_VERSION}/wp-cli-${WORDPRESS_CLI_VERSION}.phar.gpg"; \
-    \
-    export GNUPGHOME="$(mktemp -d)"; \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$WORDPRESS_CLI_GPG_KEY"; \
-    gpg --batch --decrypt --output /usr/local/bin/wp /usr/local/bin/wp.gpg; \
-    rm -rf "$GNUPGHOME" /usr/local/bin/wp.gpg; \
-    \
-    
+    curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
     chmod +x /usr/local/bin/wp; \
-    
-    \
-    wp --allow-root --version
-    wp package install aaemnnosttv/wp-cli-dotenv-command
+    wp --allow-root --version; \
+    wp package install aaemnnosttv/wp-cli-dotenv-command;
 
 USER laradock
 
