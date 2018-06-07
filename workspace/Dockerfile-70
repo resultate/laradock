@@ -288,11 +288,12 @@ ENV WORDPRESS_CLI_SHA512 8693cdbc06cca37be9976c4f76aa81c111095f88bb121277cbdfa85
 RUN set -ex; \
     \
     curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
-    chmod +x /usr/local/bin/wp; \
-    wp --allow-root --version; \
-    wp package install aaemnnosttv/wp-cli-dotenv-command;
+    chmod +x /usr/local/bin/wp;
 
 USER laradock
+RUN set -ex; \
+    wp --allow-root --version; \
+    wp package install aaemnnosttv/wp-cli-dotenv-command;
 
 #####################################
 # Drush:
